@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import date
-from typing import List, Optional
+from typing import List
 
 class BookBase(BaseModel):
     title: str
@@ -27,7 +27,8 @@ class AuthorCreate(AuthorBase):
 
 class Author(AuthorBase):
     id: int
-    books: List[Book] = []
+    books: List[Book] = Field(default_factory=list)
+
 
     class Config:
         from_attributes = True
